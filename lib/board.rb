@@ -1,11 +1,12 @@
-#Board class
-class Board
+# frozen_string_literal: true
 
+# Board class
+class Board
   attr_accessor :fields
 
   def initialize
-    @fields = { 1=> "", 2=> "", 3=> "", 4=> "", 5=> "",
-                      6=> "", 7=> "", 8=> "", 9=> "" }
+    @fields = { 1 => '', 2 => '', 3 => '', 4 => '', 5 => '',
+                6 => '', 7 => '', 8 => '', 9 => '' }
   end
 
   def insert(marker, position)
@@ -13,9 +14,8 @@ class Board
   end
 
   def clear
-    @fields = @fields.each do |position, marker|
-      @fields[position] = ""
+    @fields = @fields.each do |position, _marker|
+      @fields[position] = ''
     end
   end
-
 end
