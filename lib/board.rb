@@ -43,6 +43,4 @@ class Board
     @fields.values_at(1, 5, 9).all?(player) ||
     @fields.values_at(3, 5, 7).all?(player)
   end
-
-
 end

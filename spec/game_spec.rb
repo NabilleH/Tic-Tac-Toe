@@ -17,27 +17,32 @@ describe Game do
       6 => 'X', 7 => 'X', 8 => 'O', 9 => '' }
   end
 
-  subject(:game_three) { described_class.new(board: board_three) }
-  let(:board_three) { double(:board, fields: fields_three) }
-  let(:fields_three) do
-    { 1 => 'X', 2 => 'X', 3 => 'X', 4 => '', 5 => '',
-      6 => '', 7 => '', 8 => '', 9 => '' }
-  end
-
   describe 'Game over' do
     it 'knows when the game is over with no winner' do
-      expect(game_one.over?).to eq(true)
+      expect(game_one.game_over?).to eq(true)
     end
 
     it 'knows when the game is NOT over' do
-      expect(game_two.over?).to eq(false)
+      expect(game_two.game_over?).to eq(false)
     end
   end
 
-  # describe 'Winning a game' do
-  #
-  #   it "knows when X wins with a first line horizontal" do
-  #     expect(game_three.winner?('X')).to eq('X')
-  #   end
-  # end
+  describe 'Player wins' do
+    it 'returns true if player X has won' do
+      allow(board_one).to receive(:check_lines).and_return(true)
+      expect(game_one.player_wins?('X')).to eq(true)
+    end
+
+    it 'returns false if player X has not yet won' do
+      allow(board_one).to receive(:check_lines).and_return(false)
+      expect(game_one.player_wins?('X')).to eq(false)
+    end
+  end
+
+  describe 'play' do
+    it 'checks when a player has won and resets the game' do
+      allow(game_one).to receive(:player_wins?).and_return(true)
+      expect(game_one.play(1)).to eq('X wins!')
+    end
+  end
 end

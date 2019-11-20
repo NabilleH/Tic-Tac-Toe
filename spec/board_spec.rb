@@ -4,8 +4,10 @@ require './lib/board'
 
 describe Board do
   subject(:board_one) { described_class.new }
-  let(:fields_one) { { 1 => '', 2 => '', 3 => '', 4 => '', 5 => '',
-    6 => '', 7 => '', 8 => '', 9 => '' } }
+  let(:fields_one) do
+    { 1 => '', 2 => '', 3 => '', 4 => '', 5 => '',
+      6 => '', 7 => '', 8 => '', 9 => '' }
+  end
 
   subject(:board_two) { described_class.new }
 
@@ -105,29 +107,27 @@ describe Board do
     end
   end
 
-  describe "checking all lines for a win" do
-
-    it "returns true for a horizontal line match" do
+  describe 'checking all lines for a win' do
+    it 'returns true for a horizontal line match' do
       allow(board_two).to receive(:check_horizontal).and_return(true)
       expect(board_two.check_lines('X')).to eq(true)
     end
 
-    it "returns true for a vertical line match" do
+    it 'returns true for a vertical line match' do
       allow(board_two).to receive(:check_vertical).and_return(true)
       expect(board_two.check_lines('X')).to eq(true)
     end
 
-    it "returns true for a diagonal line match" do
+    it 'returns true for a diagonal line match' do
       allow(board_two).to receive(:check_diagonal).and_return(true)
       expect(board_two.check_lines('X')).to eq(true)
     end
 
-    it "returns false for no matches" do
+    it 'returns false for no matches' do
       allow(board_two).to receive(:check_horizontal).and_return(false)
       allow(board_two).to receive(:check_vertical).and_return(false)
       allow(board_two).to receive(:check_diagonal).and_return(false)
       expect(board_two.check_lines('X')).to eq(false)
     end
-
   end
 end
