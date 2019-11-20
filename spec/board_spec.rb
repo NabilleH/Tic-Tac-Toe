@@ -14,8 +14,7 @@ describe Board do
   end
 
   describe 'inserting a move' do
-    it "inserts an 'X' int
-    o field 1" do
+    it "inserts an 'X' into field 1" do
       board_one.insert('X', 1)
       expect(board_one.fields[1]).to eq('X')
     end
@@ -104,5 +103,31 @@ describe Board do
                            6 => '', 7 => '', 8 => '', 9 => '' }
       expect(board_two.check_diagonal('X')).to eq(false)
     end
+  end
+
+  describe "checking all lines for a win" do
+
+    it "returns true for a horizontal line match" do
+      allow(board_two).to receive(:check_horizontal).and_return(true)
+      expect(board_two.check_lines('X')).to eq(true)
+    end
+
+    it "returns true for a horizontal line match" do
+      allow(board_two).to receive(:check_vertical).and_return(true)
+      expect(board_two.check_lines('X')).to eq(true)
+    end
+
+    it "returns true for a horizontal line match" do
+      allow(board_two).to receive(:check_diagonal).and_return(true)
+      expect(board_two.check_lines('X')).to eq(true)
+    end
+
+    it "returns false for no matches" do
+      allow(board_two).to receive(:check_horizontal).and_return(false)
+      allow(board_two).to receive(:check_vertical).and_return(false)
+      allow(board_two).to receive(:check_diagonal).and_return(false)
+      expect(board_two.check_lines('X')).to eq(false)
+    end
+
   end
 end

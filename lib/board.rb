@@ -19,7 +19,13 @@ class Board
     end
   end
 
+  def check_lines(player)
+    return true if check_horizontal(player)
+    return true if check_vertical(player)
+    return true if check_diagonal(player)
 
+    false
+  end
 
   def check_horizontal(player)
     @fields.values_at(1, 2, 3).all?(player) ||
