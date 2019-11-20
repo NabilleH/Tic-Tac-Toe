@@ -9,8 +9,8 @@ class Board
                 6 => '', 7 => '', 8 => '', 9 => '' }
   end
 
-  def insert(marker, position)
-    @fields[position] = marker
+  def insert(player, position)
+    @fields[position] = player
   end
 
   def clear

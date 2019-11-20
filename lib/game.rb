@@ -21,6 +21,7 @@ class Game
   def play(position)
     return if invalid_move?(position)
 
+    @board.insert(player, position)
     if player_wins?(player)
       reset_game
       return "#{player} wins!"
@@ -35,14 +36,15 @@ class Game
   private
 
   def invalid_move?(position)
-    return true if position != 1..9
+    return true if position < 1 || position > 9
     return true unless position.is_a?(Integer)
+    return true if @board.fields[position] != ''
 
     false
   end
 
   def reset_game
-    @board = Board.new
+    @board.clear
     @player = 'X'
   end
 
