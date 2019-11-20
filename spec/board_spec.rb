@@ -112,12 +112,12 @@ describe Board do
       expect(board_two.check_lines('X')).to eq(true)
     end
 
-    it "returns true for a horizontal line match" do
+    it "returns true for a vertical line match" do
       allow(board_two).to receive(:check_vertical).and_return(true)
       expect(board_two.check_lines('X')).to eq(true)
     end
 
-    it "returns true for a horizontal line match" do
+    it "returns true for a diagonal line match" do
       allow(board_two).to receive(:check_diagonal).and_return(true)
       expect(board_two.check_lines('X')).to eq(true)
     end
