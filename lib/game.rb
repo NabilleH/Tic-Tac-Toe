@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'board'
 # Game class
 class Game
   def initialize(board: nil)
@@ -7,8 +8,16 @@ class Game
   end
 
   def over?
-    return true unless @board.fields.value?('')
+    @board.fields.value?('') ? false : true
+  end
 
-    false
+  def winner?(player)
+    return player if player_wins?(player)
+  end
+
+  private
+
+  def player_wins?(player)
+    @board.check_lines(player)
   end
 end

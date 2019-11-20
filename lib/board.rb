@@ -18,4 +18,25 @@ class Board
       @fields[position] = ''
     end
   end
+
+
+
+  def check_horizontal(player)
+    @fields.values_at(1, 2, 3).all?(player) ||
+    @fields.values_at(4, 5, 6).all?(player) ||
+    @fields.values_at(7, 8, 9).all?(player)
+  end
+
+  def check_vertical(player)
+    @fields.values_at(1, 4, 7).all?(player) ||
+    @fields.values_at(2, 5, 8).all?(player) ||
+    @fields.values_at(3, 6, 9).all?(player)
+  end
+
+  def check_diagonal(player)
+    @fields.values_at(1, 5, 9).all?(player) ||
+    @fields.values_at(3, 5, 7).all?(player)
+  end
+
+
 end
