@@ -8,4 +8,14 @@ class Board
                       6=> "", 7=> "", 8=> "", 9=> "" }
   end
 
+  def insert(marker, position)
+    @fields[position] = marker
+  end
+
+  def clear
+    @fields = @fields.each do |position, marker|
+      @fields[position] = ""
+    end
+  end
+
 end
