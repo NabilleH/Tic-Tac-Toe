@@ -19,6 +19,14 @@ class Board
     end
   end
 
+  def board_full?
+    @fields.value?('') ? false : true
+  end
+
+  def field_unavailable?(position)
+    @fields[position] != ''
+  end
+
   def check_lines(player)
     return true if check_horizontal(player)
     return true if check_vertical(player)

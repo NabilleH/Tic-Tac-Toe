@@ -35,6 +35,37 @@ describe Board do
     end
   end
 
+  describe "board is full?" do
+
+    it "checks if the board is full" do
+      board_one.fields = { 1 => 'X', 2 => 'X', 3 => 'O', 4 => 'O', 5 => 'X',
+                           6 => 'X', 7 => 'X', 8 => 'O', 9 => 'O' }
+      expect(board_one.board_full?).to eq(true)
+    end
+
+    it "checks if the board is NOT full" do
+      board_one.fields = { 1 => '', 2 => '', 3 => 'O', 4 => 'O', 5 => 'X',
+                           6 => 'X', 7 => '', 8 => 'O', 9 => 'O' }
+      expect(board_one.board_full?).to eq(false)
+    end
+  end
+
+  describe "check if field is NOT navailable" do
+
+    it "returns true if the field is NOT available" do
+      board_one.fields = { 1 => 'X', 2 => '', 3 => 'O', 4 => 'O', 5 => 'X',
+                           6 => 'X', 7 => '', 8 => 'O', 9 => 'O' }
+      expect(board_one.field_unavailable?(1)).to eq(true)
+    end
+
+    it "returns true if the field IS available" do
+      board_one.fields = { 1 => '', 2 => '', 3 => 'O', 4 => 'O', 5 => 'X',
+                           6 => 'X', 7 => '', 8 => 'O', 9 => 'O' }
+      expect(board_one.field_unavailable?(1)).to eq(false)
+    end
+
+  end
+
   describe 'check horizontal match' do
     it 'returns true if there is a first row horizontal match' do
       board_two.fields = { 1 => 'X', 2 => 'X', 3 => 'X', 4 => '', 5 => '',
