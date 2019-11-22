@@ -39,7 +39,7 @@ class Game
   def reset_game
     @board.clear
     @player = 'X'
-    true
+    true #front end to handle display message
   end
 
   def update_turn
