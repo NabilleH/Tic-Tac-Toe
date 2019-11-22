@@ -42,21 +42,24 @@ describe Game do
   # end
 
   describe 'play' do
-    it 'checks when a player has won and resets the game' do
+    it 'checks when a game has ended and returns true' do
       allow(game_one).to receive(:invalid_move?).and_return(false)
       allow(board_one).to receive(:insert)
       allow(board_one).to receive(:clear)
-      allow(game_one).to receive(:player_wins?).and_return(true)
-      expect(game_one.play(1)).to eq('X wins!')
+      allow(game_one).to receive(:game_over?).and_return(true)
+      allow(game_one).to receive(:reset_game).and_return(true)
+      allow(game_one).to receive(:player_wins?)
+      expect(game_one.play(1)).to eq(true)
     end
 
-    it 'checks for a draw and resets the game' do
+    it 'checks when the game is still active and returns false' do
       allow(game_one).to receive(:invalid_move?).and_return(false)
       allow(board_one).to receive(:insert)
       allow(board_one).to receive(:clear)
       allow(game_one).to receive(:player_wins?).and_return(false)
-      allow(game_one).to receive(:game_over?).and_return(true)
-      expect(game_one.play(1)).to eq('Game is a draw')
+      allow(game_one).to receive(:game_over?).and_return(false)
+      allow(game_one).to receive(:update_turn).and_return(false)
+      expect(game_one.play(1)).to eq(false)
     end
   end
 end

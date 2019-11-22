@@ -14,15 +14,8 @@ class Game
     return if invalid_move?(position)
 
     @board.insert(player, position)
-    if player_wins?(player)
-      reset_game
-      return "#{player} wins!"
-    elsif game_over?
-      reset_game
-      return 'Game is a draw'
-    end
 
-    update_turn
+    game_over? ? reset_game : update_turn
   end
 
   private
@@ -32,7 +25,7 @@ class Game
   end
 
   def game_over?
-    @board.board_full?
+    return true if player_wins?(player) || @board.board_full?
   end
 
   def invalid_move?(position)
@@ -46,9 +39,11 @@ class Game
   def reset_game
     @board.clear
     @player = 'X'
+    true
   end
 
   def update_turn
     @player = @player == 'X' ? 'O' : 'X'
+    false
   end
 end
